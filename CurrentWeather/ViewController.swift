@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var labelCityName: UILabel!
     @IBOutlet weak var labelTemperature: UILabel!
     @IBOutlet weak var Description: UILabel!
+    @IBOutlet weak var Prediction: UIButton!
     @IBOutlet weak var imageMeteo: UIImageView!
     @IBOutlet weak var Temperature: UILabel!
    
@@ -105,6 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.Temperature.isHidden = false
                     self.Description.isHidden = false
                     self.labelTemperature.isHidden = false
+                    self.Prediction.isHidden = false
                     self.labelTemperature.text = String(format: "%.0f", temp!) + "°C"
                     self.imageMeteo.isHidden = false
                     switch resWeather?["main"] as? String ?? "" {

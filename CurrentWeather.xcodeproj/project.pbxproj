@@ -13,7 +13,6 @@
 		DA76B9931E543C080035BFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA76B9921E543C080035BFBE /* Assets.xcassets */; };
 		DA76B9961E543C080035BFBE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA76B9941E543C080035BFBE /* LaunchScreen.storyboard */; };
 		DA76B9A11E543C080035BFBE /* CurrentWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA76B9A01E543C080035BFBE /* CurrentWeatherTests.swift */; };
-		DAF757F11E94E1C50083E910 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF757F01E94E1C50083E910 /* TableViewController.swift */; };
 		DAF757F31E94E2140083E910 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF757F21E94E2140083E910 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		DA76B99C1E543C080035BFBE /* CurrentWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrentWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA76B9A01E543C080035BFBE /* CurrentWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTests.swift; sourceTree = "<group>"; };
 		DA76B9A21E543C080035BFBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DAF757F01E94E1C50083E910 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		DAF757F21E94E2140083E910 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +85,6 @@
 				DA76B9921E543C080035BFBE /* Assets.xcassets */,
 				DA76B9941E543C080035BFBE /* LaunchScreen.storyboard */,
 				DA76B9971E543C080035BFBE /* Info.plist */,
-				DAF757F01E94E1C50083E910 /* TableViewController.swift */,
 				DAF757F21E94E2140083E910 /* TableViewCell.swift */,
 			);
 			path = CurrentWeather;
@@ -207,7 +204,6 @@
 			files = (
 				DA76B98E1E543C080035BFBE /* ViewController.swift in Sources */,
 				DAF757F31E94E2140083E910 /* TableViewCell.swift in Sources */,
-				DAF757F11E94E1C50083E910 /* TableViewController.swift in Sources */,
 				DA76B98C1E543C080035BFBE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

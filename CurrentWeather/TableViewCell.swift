@@ -11,5 +11,9 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     //MARK: Properties
+    @IBOutlet weak var Day: UILabel!
+    @IBOutlet weak var TempMorn: UILabel!
+    @IBOutlet weak var TempEve: UILabel!
+    @IBOutlet weak var TempNight: UILabel!
     
 }
