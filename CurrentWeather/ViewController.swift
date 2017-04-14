@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: Properties
     @IBOutlet weak var textCityName: UITextField!
@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Prediction: UIButton!
     @IBOutlet weak var imageMeteo: UIImageView!
     @IBOutlet weak var Temperature: UILabel!
+    var resList: NSArray = [];
    
     @IBAction func Prediction(_ sender: UIButton) {
         if tableView.isHidden == false{
@@ -29,11 +30,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: UITextFieldDelegate
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tempNight: UITextField!
-    @IBOutlet weak var tempEve: UITextField!
-    @IBOutlet weak var tempMorn: UITextField!
-    @IBOutlet weak var day: UITextField!
-    @IBOutlet weak var imageMeteoPred: UIImageView!
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -41,11 +38,55 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return resList.count - 1;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create a new cell if needed or reuse an old one
+        let cell:TableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cellID") as UITableViewCell! as! TableViewCell
+        
+        let resTemps = resList[indexPath.row + 1] as? NSDictionary
+        let resTemp = resTemps?["temp"] as?NSDictionary
+        let resWeathers = resTemps?["weather"] as?NSArray
+        let resWeather = resWeathers?[0] as? NSDictionary
+        let tempEve = resTemp?["eve"] as? Double
+        let tempMorn = resTemp?["morn"] as? Double
+        let tempNight = resTemp?["night"] as? Double
+        let dt = resTemps?["dt"] as? Double
+        let date = NSDate(timeIntervalSince1970: dt!) as? Date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd,yyyy"
+        
+        let Rdate = dateFormatter.string(from: date!)
+        
+        // set the text from the data model
+        cell.Day.text = String(describing: Rdate)
+        cell.tempEve.text = String(format: "%.0f", tempEve!) + "°C"
+        cell.tempMorn.text = String(format: "%.0f", tempMorn!) + "°C"
+        cell.tempNight.text = String(format: "%.0f", tempNight!) + "°C"
+        switch resWeather?["main"] as? String ?? "" {
+        case "Clear" : cell.imagePred.image = #imageLiteral(resourceName: "Soleil")
+        case "Rain" : cell.imagePred.image = #imageLiteral(resourceName: "Pluie")
+        case "Drizzle" : cell.imagePred.image = #imageLiteral(resourceName: "Pluie")
+        case "Thunderstorm" : cell.imagePred.image = #imageLiteral(resourceName: "Orage")
+        case "Extreme" : cell.imagePred.image = #imageLiteral(resourceName: "Orage")
+        case "Snow" : cell.imagePred.image = #imageLiteral(resourceName: "Neige")
+        case "Hail" : cell.imagePred.image = #imageLiteral(resourceName: "Grele")
+        default : cell.imagePred.image = #imageLiteral(resourceName: "Nuage")
+        }
+
+        
+        return cell
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // self.tableView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
-        //imageMeteo.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,9 +133,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 let resCity = res["city"] as? NSDictionary
-                let resList = res["list"] as? NSArray
+                self.resList = (res["list"] as? NSArray)!
                 
-                let resTemps = resList?[0] as? NSDictionary
+                let resTemps = self.resList[0] as? NSDictionary
                 let resTemp = resTemps?["temp"] as?NSDictionary
                 let resWeathers = resTemps?["weather"] as?NSArray
                 let resWeather = resWeathers?[0] as? NSDictionary
@@ -102,6 +143,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 
                 DispatchQueue.main.async {
+                    self.tableView.reloadData()
                     self.labelCityName.text = resCity?["name"] as? String ?? ""
                     self.Temperature.isHidden = false
                     self.Description.isHidden = false
@@ -120,12 +162,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     default : self.imageMeteo.image = #imageLiteral(resourceName: "Nuage")
                     }
                     
-                    for i in 0..<16{
-                        
-                    }
                 }
                 
-                print(res)
+                //print(self.resList)
             } catch {
                 print("error parsing response from")
             }

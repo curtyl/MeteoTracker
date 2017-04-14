@@ -8,12 +8,14 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell{
     
     //MARK: Properties
+
+    @IBOutlet weak var imagePred: UIImageView!
     @IBOutlet weak var Day: UILabel!
-    @IBOutlet weak var TempMorn: UILabel!
-    @IBOutlet weak var TempEve: UILabel!
-    @IBOutlet weak var TempNight: UILabel!
+    @IBOutlet weak var tempMorn: UILabel!
+    @IBOutlet weak var tempEve: UILabel!
+    @IBOutlet weak var tempNight: UILabel!
     
 }
